@@ -6,8 +6,6 @@
 
 ### Dependencies 
 
-
-
 Following 3rd Party Jars are used.
 
 For Object Mapper
