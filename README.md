@@ -55,9 +55,18 @@ Following technologises used for ploting the Graph
 
 ![file_copy](https://user-images.githubusercontent.com/1702024/74364703-15190700-4de6-11ea-9fdf-b200553236e9.png)
 
-3. Run the Client jar & wait for number of run completes
+3. Run the Client jar & wait for number of run to completes
+
+![client_run](https://user-images.githubusercontent.com/1702024/74365015-af794a80-4de6-11ea-949d-2fc4732bd05c.png)
 
 4. Run the Server jar & REST server will be listen in 9090 Port
+
+![server_run](https://user-images.githubusercontent.com/1702024/74365179-f6674000-4de6-11ea-919d-1c4589a7dba8.png)
+
+5. Open the index.html file into Chrome web browser & view the data
+
+![Result_view](https://user-images.githubusercontent.com/1702024/74365311-41815300-4de7-11ea-98ef-3dacd7e473b5.png)
+
 
 
 
