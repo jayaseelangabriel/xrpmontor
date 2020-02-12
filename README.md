@@ -45,6 +45,8 @@ Following technologises used for ploting the Graph
 
 ## Screen shorts 
 
- 
+1. Default Config File
+
+![default_config](https://user-images.githubusercontent.com/1702024/74331663-8d170b00-4dad-11ea-93f4-4076320c5ecb.PNG)
 
 
