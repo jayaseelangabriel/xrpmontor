@@ -2,6 +2,7 @@
 
 ## Quick Start 
 
+This program is periodically calls rippled’s server_info command (JSON-RPC) and records the sequence number of the latest validated ledger along with the current time stamp and record those records in a flat file ( CSV format). The HTML page is used for visualizes how frequently the ledger sequence is incremented over using Graphical notation
 
 ## Dependencies 
 
