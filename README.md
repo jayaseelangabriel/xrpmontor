@@ -1,11 +1,11 @@
 # xrpmonitor - XRP Monitoring APP
 
 ### Quick Start 
-======
+
 
 
 ### Dependencies 
-======
+
 
 Following 3rd Party Jars are used.
 
@@ -28,11 +28,11 @@ For Light weight Webserver
 
 
 ### How to Run 
-======
+
 
 
 ### Screen shorts 
-======
+
  
 
 
