@@ -38,6 +38,7 @@ Following technologises used for ploting the Graph
 * Open **config.properties** file & make the require changes 
 * Open a command prompt and run the **xrpmonitor_client.jar** file using below command
   * `java -jar xrpmonitor_client.jar`
+* Program will automatically terminates once it reaches the total number of run  
 * After program completes, Data are recorded in *ripple.output.folder*
 * Open a command prompt and run the **xrpmonitor_client.jar** file using below command
   * `java -jar xrpmonitor_server.jar` Server will be started in 9090 port
