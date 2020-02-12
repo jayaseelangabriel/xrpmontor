@@ -51,4 +51,14 @@ Following technologises used for ploting the Graph
 
 ![default_config](https://user-images.githubusercontent.com/1702024/74331663-8d170b00-4dad-11ea-93f4-4076320c5ecb.PNG)
 
+2. Copy the jar files to folder along with resource folder
+
+![file_copy](https://user-images.githubusercontent.com/1702024/74364703-15190700-4de6-11ea-9fdf-b200553236e9.png)
+
+3. Run the Client jar & wait for number of run completes
+
+4. Run the Server jar & REST server will be listen in 9090 Port
+
+
+
 
