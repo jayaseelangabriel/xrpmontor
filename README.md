@@ -8,23 +8,23 @@ This program is periodically calls rippled’s server_info command (JSON-RPC) an
 
 Following 3rd Party Jars are used for implemenation of Java module.
 
-For Object Mapper
+For Response Handling ( JSON to JAVA Object )
  * com.fasterxml.jackson.databind.jar
  * jackson-core-2.2.3.jar
  * jackson-annotations-2.0.1.jar
-
-For HTTP Client 
- * commons-codec-1.11.jar
  * commons-csv-1.8.jar
  * commons-io-2.6.jar
+
+For Client Application  
+ * commons-codec-1.11.jar
  * commons-logging-1.2.jar
  * httpclient-4.5.10.jar
  * httpcore-4.4.12.jar
 
-For Light weight Webserver
+For Light weight Webserver ( Server Application)
 * nanohttpd-2.3.1.jar
 
-Following technologises used for ploting the Graph 
+Following technologises used for ploting the Graph  ( Visualization) 
 
 * Bootstrap 4
 * ChartJS
