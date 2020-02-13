@@ -6,7 +6,7 @@ This program periodically calls the rippled’s server_info command (JSON-RPC) a
 
 ## Dependencies 
 
-Third Party Jars used in the implementation
+Following third Party Jars are used in the implementation
 
 For Response Handling ( JSON to JAVA Object )
  * com.fasterxml.jackson.databind.jar
@@ -33,8 +33,8 @@ Following technologises used for ploting the Graph  ( Visualization)
 
 ## How to Run 
 
-* This Application is tested with Java 1.8 & Windows 10  & Chrome Browser
-* Copy the **xrpmonitor_server.jar**  & **xrpmonitor_client.jar** and **index.html** jar file from build folder and place it in your work station 
+* This Application is tested with Java 1.8 & Chrome Browser in Windows 10 operating system
+* Copy the **xrpmonitor_server.jar**  & **xrpmonitor_client.jar** and **index.html** jar file from build folder and place it in your work station local filesystem
 * copy the resource folder to where **xrpmonitor_client.jar** jar file is copied
 * Open **config.properties** file & make the require changes 
 * Open a command prompt and run the **xrpmonitor_client.jar** file using below command
@@ -43,7 +43,7 @@ Following technologises used for ploting the Graph  ( Visualization)
 * After program completes, Data are recorded in *ripple.output.folder*
 * Open a command prompt and run the **xrpmonitor_client.jar** file using below command
   * `java -jar xrpmonitor_server.jar` Server will be started in 9090 port
-* Open **index.html** file in Chrome web browser and view the graph  
+* Open **index.html** file in Chrome web browser and view the graph & other details 
 
 ## Screen shorts 
 
