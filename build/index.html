@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ripple Server Info - Charts</title>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="https://ripple.com/wp-content/themes/ripple-beta/assets/img/logo/ripple-logo-color@2x.png"  class="d-inline-block align-top" alt="">
+  </a>
+</nav>
+
+
+  
+  <div class="row">
+  </div>
+
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-sm-12">
+	<div class="card">
+  <div class="card-header bg-primary text-white">
+   Ripple XRP - Sequence Monitoring Graph 
+  </div>
+  <div class="card-body">
+    <canvas id="barChart" height="80px;"></canvas>
+  </div>
+</div>
+       
+    </div>
+  </div>
+  
+  <div class="row" style="padding-top: 10px;">
+  <div class="col-sm-6">
+		<div class="card">
+			<div class="card-header bg-info text-white">Time Analysis - General</div>
+			<div class="card-body">
+				<div class="row">
+					
+					<div class="col-sm-4">
+						<div class="card "> 	
+							<div class="card-header">Start Time</div>
+							<div class="card-body">
+								<a href="#" class="btn btn-primary" id="stime">2</a>
+							</div>
+	  
+						</div>
+					</div>
+	
+					<div class="col-sm-4">
+						<div class="card"> 	
+							<div class="card-header">Interval(MilliSec)</div>
+							<div class="card-body">
+								<a href="#" class="btn btn-success" id="interval">3</a>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="card-header">Total Run</div>
+							<div class="card-body">
+								<a href="#" class="btn btn-primary" id="totalrun">5</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  
+	<div class="col-sm-6">
+		<div class="card">
+			<div class="card-header bg-warning text-white">Sequence Analysis - Time Required for complete One Sequence</div>
+			<div class="card-body">
+				<div class="row">
+					
+					<div class="col-sm-4">
+						<div class="card "> 	
+							<div class="card-header">Minimum (Sec)</div>
+							<div class="card-body">
+								<a href="#" class="btn btn-primary" id="minval">2</a>
+							</div>
+	  
+						</div>
+					</div>
+	
+					<div class="col-sm-4">
+						<div class="card"> 	
+							<div class="card-header">Average(Sec)</div>
+							<div class="card-body">
+								<a href="#" class="btn btn-success" id="avgval">3</a>
+							</div>
+						</div>
+					</div>
+	  
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="card-header">Maximum(Sec)</div>
+							<div class="card-body">
+								<a href="#" class="btn btn-danger" id="maxval">5</a>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+  
+</div>
+</body>
+
+<script>
+
+
+
+function renderChart(data, labels,min,max,avg,count) {
+
+    var ctx = document.getElementById("barChart").getContext('2d');
+	Chart.defaults.global.elements.line.fill = false;
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Sequence Number',
+				type: 'line',
+                backgroundColor: "rgba(122, 76, 178, 0.64)",
+				borderColor: "rgba(122, 76, 178, 0.64)",
+				lineTension:1,
+				data: data,
+				yAxisID: 'yaxis_1'
+            },
+			{
+				type: 'bar',
+                backgroundColor: 'rgba(12, 242, 73, 0.82)',
+				label: 'Time Taken for 1 Sequence',
+				borderWidth: 1,
+                data: count,
+                yAxisID: 'yaxis_2'
+            }
+			]
+        },
+		options: {
+		title: {
+			display: true,
+			text: "XRP Sequence Monitor"
+		},
+		tooltips: {
+		mode: 'label'
+		},
+        responsive: true,
+        scales: {
+            yAxes: [
+                {
+                    position: 'left',
+                    id: 'yaxis_1',
+					 scaleLabel: {
+          display: true,
+          labelString: 'Sequence Number'
+        },
+                    ticks: {
+                       // min: 536,
+                       // max: 3123
+                    }
+                },
+                {
+                    position: 'right',
+					 scaleLabel: {
+          display: true,
+          labelString: 'Average completed Sequence per run (Seconds)'
+        },
+                    id: 'yaxis_2',
+                    ticks: {
+                         min: 0,
+                         max: 7
+                    }
+                } 
+            ]
+        }
+    }
+		
+    });
+}
+
+$( document ).ready(function() {
+	$.getJSON( "http://localhost:9090", function( data ) {
+	renderChart(data.sequence,data.time,data.min,data.max,data.avg,data.persequence);
+	$("#minval").html(data.min);
+	$("#avgval").html(data.avg);
+	$("#maxval").html(data.max);
+	$("#stime").html(data.starttime);
+	
+	$("#interval").html(data.interval);
+	$("#totalrun").html(data.totalrun);
+	
+	});
+});
+
+</script>
+
+</html>
