@@ -51,34 +51,48 @@ public class LightRESTServer extends NanoHTTPD {
     	List<Integer> currentsequenseList = new ArrayList<Integer>();
     	List<Integer> squencedifferenceList = new ArrayList<Integer>();
     	
+    	List<Float> persequenceList = new ArrayList<Float>();
+    	
+    	
     	
     	try (
                 Reader reader = Files.newBufferedReader(Paths.get(PropertyManager.getValue("ripple.output.folder")+"/"+PropertyManager.getValue("ripple.output.filename")));
                 CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
             ) {
     		
-    			int i=0,sum=0;
+    			int i=0;
+    			float sum=0;
     			
                 for (CSVRecord csvRecord : csvParser) {
                     
-                    String time = csvRecord.get(0).substring(10);
+                	if(i==0) {
+                		 jsonMap.put("starttime", csvRecord.get(0));
+                		 jsonMap.put("interval", PropertyManager.getValue("ripple.run.interval"));
+                		 jsonMap.put("totalrun", PropertyManager.getValue("ripple.total.run"));
+                	}
+                	
+                    String time = csvRecord.get(0).substring(7);
                     String currentsequense = csvRecord.get(1);
                     String squencedifference = csvRecord.get(2);
+                    String persequence = csvRecord.get(4);
                     
                     timelist.add(time);
                     squencedifferenceList.add(Integer.parseInt(squencedifference));
                     currentsequenseList.add(Integer.parseInt(currentsequense));
-                    sum+=Integer.parseInt(squencedifference);
+                    persequenceList.add(Float.parseFloat(persequence));
+                    
+                    sum+=Float.parseFloat(persequence);
                     i++;
                  }
                 
                 jsonMap.put("data", squencedifferenceList);
                 jsonMap.put("time", timelist);
                 jsonMap.put("sequence", currentsequenseList);
+                jsonMap.put("persequence", persequenceList);
                 
-                jsonMap.put("min", Collections.min(squencedifferenceList));
-                jsonMap.put("max", Collections.max(squencedifferenceList));
-                jsonMap.put("avg", sum/i);
+                jsonMap.put("min", Collections.min(persequenceList));
+                jsonMap.put("max", Collections.max(persequenceList));
+                jsonMap.put("avg", Math.round(sum/(float)i * 100.0) / 100.0);
                 
                 
     	}catch (Exception e) {

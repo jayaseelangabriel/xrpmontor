@@ -10,6 +10,7 @@ package com.ripple.poc.main;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,8 +45,9 @@ public class URLWatcher extends TimerTask {
 
     @Override
     public void run() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~URL fetch Task Started~~~~~~~~~~~~~~~~~~~~~~~~");
+        
         runindex++;
+        System.out.println("Run Index:"+runindex);
         createreceipt();
         
         if(totalrun==runindex) {
@@ -74,32 +76,37 @@ public class URLWatcher extends TimerTask {
  			HttpResponse rawResponse = httpClient.execute(postMethod);
  			String responseString = new BasicResponseHandler().handleResponse(rawResponse);
 	 			
- 			
+ 			System.out.println(responseString);
  			// Opject Mapper used to Convert the JSON to JAXB
     		ObjectMapper mapper = new ObjectMapper();
     		Response rippleResponse  = mapper.readValue(responseString, Response.class); 
     		
-    		System.out.println(rippleResponse.getId());
+    		
     		System.out.println(rippleResponse.getResult().getInfo().getValidatedLedger().getSeq());
-            System.out.println(rippleResponse.getResult().getInfo().getTime().substring(5,20));
+            System.out.println("Ripple:"+rippleResponse.getResult().getInfo().getTime().substring(5,24));
+            System.out.println("System:"+new Date());
     		
     		if (numberofrun != 0) 
     			{
     				previous_seq = current_seq;
     				previous_time=current_time;
     				current_seq =(int)rippleResponse.getResult().getInfo().getValidatedLedger().getSeq();
-    				current_time = rippleResponse.getResult().getInfo().getTime().substring(5,20);
+    				current_time = rippleResponse.getResult().getInfo().getTime().substring(5,24);
     				File sourceFile = new File( PropertyManager.getValue("ripple.output.folder"), PropertyManager.getValue("ripple.output.filename") );
     				List <String> list = new ArrayList<String>();
     				int seqdifference = current_seq - previous_seq;
-    				float perSequence = Utils.getSecounds(previous_time, current_time)/(float)seqdifference;
+    				float perSequence=0;
+    				if(seqdifference!=0) {
+    					perSequence = Utils.getSecounds(previous_time, current_time)/(float)seqdifference;
+    				}
+    				
     				// File Pattern [DATE,SEQUENCE#,SEQUENCE DIFFERENCE, SECOND DIFFERENCE BETWEEN CURRENT AND PREVIOUS RUN, PER SEQ AVG COMPLETE TIME
-    				String line = rippleResponse.getResult().getInfo().getTime().substring(5,20) +","+current_seq+","+seqdifference+","+Utils.getSecounds(previous_time, current_time)+","+Math.round(perSequence * 100.0) / 100.0;;
+    				String line = rippleResponse.getResult().getInfo().getTime().substring(5,24) +","+current_seq+","+seqdifference+","+Utils.getSecounds(previous_time, current_time)+","+Math.round(perSequence * 100.0) / 100.0;;
     				list.add(line);
     				FileUtils.writeLines(sourceFile, list, true);
     			}else {
 	    			current_seq =(int)rippleResponse.getResult().getInfo().getValidatedLedger().getSeq();
-	    			current_time = rippleResponse.getResult().getInfo().getTime().substring(5,20);
+	    			current_time = rippleResponse.getResult().getInfo().getTime().substring(5,24);
     				File sourceFile = new File( PropertyManager.getValue("ripple.output.folder"), PropertyManager.getValue("ripple.output.filename") );
     				List <String> list = new ArrayList<String>();
     				FileUtils.writeLines(sourceFile, list, false);

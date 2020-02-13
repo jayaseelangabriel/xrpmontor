@@ -15,8 +15,6 @@ public class Response {
 	@JsonProperty("info")
 	protected Result.Info info;
 	
-	
-	
 	@JsonProperty("type")
     protected String type;
 
@@ -126,8 +124,21 @@ public class Response {
 	            @JsonProperty("server_state")
 	            protected String serverState;
 	            
+	            @JsonProperty("published_ledger")
+	            protected int publishedLedger;
 	            
-	            @JsonProperty("server_state_duration_us")
+	           
+
+				public int getPublishedLedger() {
+					return publishedLedger;
+				}
+
+				public void setPublishedLedger(int publishedLedger) {
+					this.publishedLedger = publishedLedger;
+				}
+
+
+				@JsonProperty("server_state_duration_us")
 	            protected BigInteger serverStateDurationUs;
 	           
 	            @JsonProperty("state_accounting")
