@@ -2,11 +2,11 @@
 
 ## Quick Start 
 
-This program is periodically calls rippled’s server_info command (JSON-RPC) and records the sequence number of the latest validated ledger along with the current time stamp & records those data in a flat file ( CSV format). The HTML **index.html** page is used to visualizes how frequently the ledger sequence is incremented over time using Graphical notation **(Bar & Line charts)**
+This program periodically calls the rippled’s server_info command (JSON-RPC) and records the sequence number of the latest validated ledger along with the current timestamp & records those data in a flat-file ( CSV format). The HTML **index.html** page is used to visualizes how frequently the ledger sequence is incremented over time using Graphical notation **(Bar & Line charts)**
 
 ## Dependencies 
 
-Following 3rd Party Jars are used for implemenation of Java module.
+Third Party Jars used in the implementation
 
 For Response Handling ( JSON to JAVA Object )
  * com.fasterxml.jackson.databind.jar
